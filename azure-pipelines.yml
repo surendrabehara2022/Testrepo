@@ -27,14 +27,14 @@ steps:
     tags: |
       $(Build.BuildId)
 
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'myAzureSubscription'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az containerapp update \
-        --name mycontainerapp \
-        --resource-group myResourceGroup \
-        --image myacr.azurecr.io/$(imageName):$(Build.BuildId)
-  displayName: 'Deploy to Azure Container App'
+#- task: AzureCLI@2
+#  inputs:
+#    azureSubscription: 'myAzureSubscription'
+#    scriptType: 'bash'
+#    scriptLocation: 'inlineScript'
+#    inlineScript: |
+#      az containerapp update \
+#        --name mycontainerapp \
+#        --resource-group myResourceGroup \
+#        --image myacr.azurecr.io/$(imageName):$(Build.BuildId)
+#  displayName: 'Deploy to Azure Container App'
