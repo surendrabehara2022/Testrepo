@@ -14,10 +14,20 @@ steps:
     version: '8.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
+# Step 1: List contents of MyConsoleApp to verify the Dockerfile exists
 - script: |
-    docker build -t $(imageName):$(Build.BuildId) -f MyConsoleApp/Dockerfile MyConsoleApp
-    docker tag $(imageName):$(Build.BuildId) acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+    ls -R MyConsoleApp
+  displayName: 'List MyConsoleApp Contents'
+
+# Step 2: Build Docker Image (with corrected context)
+- script: |
+    docker build -t $(imageName):$(Build.BuildId) -f MyConsoleApp/Dockerfile MyConsoleApp/
   displayName: 'Build Docker Image'
+
+# Step 3: Tag Docker Image (optional but useful for pushing)
+- script: |
+    docker tag $(imageName):$(Build.BuildId) acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+  displayName: 'Tag Docker Image'
 
 - task: Docker@2
   inputs:
