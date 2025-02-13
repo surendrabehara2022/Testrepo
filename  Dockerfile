@@ -1,0 +1,19 @@
+# Use the official .NET 8.0 SDK image as a build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copy the project files and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy the remaining files and build the application
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Use the official .NET 8.0 runtime image as a runtime stage
+FROM mcr.microsoft.com/dotnet/runtime:8.0
+WORKDIR /app
+COPY --from=build /app/out .
+
+# Set the entry point for the container
+ENTRYPOINT ["dotnet", "MyConsoleApp.dll"]
