@@ -16,25 +16,25 @@ steps:
 
 - script: |
     docker build -t $(imageName):$(Build.BuildId) .
-    docker tag $(imageName):$(Build.BuildId) myacr.azurecr.io/$(imageName):$(Build.BuildId)
+    docker tag $(imageName):$(Build.BuildId) acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
   displayName: 'Build Docker Image'
 
 - task: Docker@2
   inputs:
-    containerRegistry: 'myACR'
+    containerRegistry: 'acrconnection'
     repository: '$(imageName)'
     command: 'push'
     tags: |
       $(Build.BuildId)
 
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'myAzureSubscription'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az containerapp update \
-        --name mycontainerapp \
-        --resource-group myResourceGroup \
-        --image myacr.azurecr.io/$(imageName):$(Build.BuildId)
-  displayName: 'Deploy to Azure Container App'
+#- task: AzureCLI@2
+#  inputs:
+#    azureSubscription: 'myAzureSubscription'
+#    scriptType: 'bash'
+#    scriptLocation: 'inlineScript'
+#    inlineScript: |
+#      az containerapp update \
+#        --name mycontainerapp \
+#        --resource-group myResourceGroup \
+#        --image myacr.azurecr.io/$(imageName):$(Build.BuildId)
+#  displayName: 'Deploy to Azure Container App'
