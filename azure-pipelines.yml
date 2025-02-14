@@ -17,6 +17,7 @@ steps:
 # Step 1: List contents of MyConsoleApp to verify the Dockerfile exists
 - script: |
     ls -R MyConsoleApp
+    ls /home/vsts/work/1/s/MyConsoleApp/Dockerfile
   displayName: 'List MyConsoleApp Contents'
 
 - script: |
