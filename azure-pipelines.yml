@@ -55,7 +55,7 @@ steps:
 
 - task: Docker@2
   inputs:
-    containerRegistry: '$(acrName)'
+    containerRegistry: 'acrconnection'
     repository: '$(imageName)'
     command: 'push'
     tags: |
