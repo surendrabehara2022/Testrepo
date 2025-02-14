@@ -50,7 +50,7 @@ steps:
     scriptLocation: 'inlineScript'  # Inline script execution
     inlineScript: |
       # Login to Azure Container Registry using Managed Identity
-      az acr login --name $(acrName) --identity
+      az acr login --name $(acrName)
   displayName: 'Login to ACR using Managed Identity'
 
 - task: Docker@2
