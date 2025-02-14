@@ -45,7 +45,7 @@ steps:
 # Step 1: Azure CLI login using Managed Identity
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'acrconnection'  # Your Azure DevOps service connection to the subscription
+    azureSubscription: 'acrserviceconnection'  # Your Azure DevOps service connection to the subscription
     scriptType: 'bash'  # Use bash to run commands
     scriptLocation: 'inlineScript'  # Inline script execution
     inlineScript: |
