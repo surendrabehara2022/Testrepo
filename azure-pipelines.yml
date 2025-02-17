@@ -53,18 +53,28 @@ steps:
       az acr login --name $(acrName)
   displayName: 'Login to ACR using Managed Identity'
 
-- task: Docker@2
+#- task: Docker@2
+#  inputs:
+#    containerRegistry: 'acrconnection'
+#    azureSubscription: 'acrserviceconnection'
+#    azureResourceManagerConnection: 'acrserviceconnection'
+#    azureContainerRegistry: 'acrsqmbqafc.azurecr.io'
+#    authenticationType: 'ManagedIdentity'
+#    managedIdentity: 'd4df28ea-176b-4a7b-8b65-90ba28838641'    
+#    repository: '$(imageName)'
+#    command: 'push'
+#    tags: |
+#      $(Build.BuildId)
+
+- task: AzureCLI@2
   inputs:
-    containerRegistry: 'acrconnection'
     azureSubscription: 'acrserviceconnection'
-    azureResourceManagerConnection: 'acrserviceconnection'
-    azureContainerRegistry: 'acrsqmbqafc.azurecr.io'
-    authenticationType: 'ManagedIdentity'
-    managedIdentity: 'd4df28ea-176b-4a7b-8b65-90ba28838641'    
-    repository: '$(imageName)'
-    command: 'push'
-    tags: |
-      $(Build.BuildId)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr login --name acrsqmbqafc
+      docker push acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+  displayName: 'Push Docker Image to ACR'
 
 #- task: AzureCLI@2
 #  inputs:
