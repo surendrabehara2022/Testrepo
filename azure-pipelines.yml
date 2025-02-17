@@ -55,8 +55,12 @@ steps:
 
 - task: Docker@2
   inputs:
-  #  containerRegistry: 'acrconnection'
+    containerRegistry: 'acrconnection'
     azureSubscription: 'acrserviceconnection'
+    azureResourceManagerConnection: 'acrserviceconnection'
+    azureContainerRegistry: 'acrsqmbqafc.azurecr.io'
+    authenticationType: 'ManagedIdentity'
+    managedIdentity: 'd4df28ea-176b-4a7b-8b65-90ba28838641'    
     repository: '$(imageName)'
     command: 'push'
     tags: |
