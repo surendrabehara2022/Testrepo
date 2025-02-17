@@ -88,5 +88,5 @@ steps:
       az containerapp update \
         --name container-app-sqmbqafc \
         --resource-group containerrg \
-        --image acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+        --image acrsqmbqafc.azurecr.io/$(imageName):latest
   displayName: 'Deploy to Azure Container App'
