@@ -85,7 +85,7 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az containerapp update \
-        --name mycontainerapp \
+        --name container-app-sqmbqafc \
         --resource-group containerrg \
         --image acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
   displayName: 'Deploy to Azure Container App'
