@@ -44,15 +44,15 @@ steps:
   displayName: 'Tag Docker Image'
 
 # Step 1: Azure CLI login using Managed Identity
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'acrserviceconnection'  # Your Azure DevOps service connection to the subscription
-    scriptType: 'bash'  # Use bash to run commands
-    scriptLocation: 'inlineScript'  # Inline script execution
-    inlineScript: |
-      # Login to Azure Container Registry using Managed Identity
-      az acr login --name $(acrName)
-  displayName: 'Login to ACR using Managed Identity'
+#- task: AzureCLI@2
+#  inputs:
+#    azureSubscription: 'acrserviceconnection'  # Your Azure DevOps service connection to the subscription
+#    scriptType: 'bash'  # Use bash to run commands
+#    scriptLocation: 'inlineScript'  # Inline script execution
+#    inlineScript: |
+#      # Login to Azure Container Registry using Managed Identity
+#      az acr login --name $(acrName)
+#  displayName: 'Login to ACR using Managed Identity'
 
 #- task: Docker@2 -- Required selfhosted agent
 #  inputs:
