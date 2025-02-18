@@ -85,7 +85,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az containerapp update \
+      az containerapp up \
         --name container-app-sqmbqafc \
         --resource-group containerrg \
         --image acrsqmbqafc.azurecr.io/$(imageName):latest
