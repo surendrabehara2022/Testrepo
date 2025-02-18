@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'myconsoleapp'
+  imageName: 'MyContainerApp'
   acrName: 'acrsqmbqafc'
 
 steps:
@@ -17,8 +17,8 @@ steps:
 
 # Step 1: List contents of MyConsoleApp to verify the Dockerfile exists
 - script: |
-    ls -R MyConsoleApp
-    ls /home/vsts/work/1/s/MyConsoleApp/Dockerfile
+    ls -R MyContainerApp
+    ls /home/vsts/work/1/s/MyContainerApp/Dockerfile
   displayName: 'List MyConsoleApp Contents'
 
 - script: |
@@ -34,7 +34,7 @@ steps:
 
 # Step 2: Build Docker Image (with corrected context)
 - script: |
-    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/MyConsoleApp/Dockerfile' MyConsoleApp/
+    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/MyContainerApp/Dockerfile' MyContainerApp/
   displayName: 'Build Docker Image'
 
 # Step 3: Tag Docker Image (optional but useful for pushing)
