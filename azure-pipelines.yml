@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  imageName: 'MyContainerApp'
+  imageName: 'myContainerapp'
   acrName: 'acrsqmbqafc'
 
 steps:
