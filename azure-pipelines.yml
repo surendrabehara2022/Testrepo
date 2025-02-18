@@ -89,4 +89,7 @@ steps:
         --name container-app-sqmbqafc \
         --resource-group containerrg \
         --image acrsqmbqafc.azurecr.io/$(imageName):latest
+        --registry-server acrsqmbqafc.azurecr.io
+        --registry-username acrsqmbqafc
+        --registry-password sekXic9UcjKWMNbZOt1mtYe/VHiIQiEhHNoD+joyYw+ACRD5oZOh                             
   displayName: 'Deploy to Azure Container App'
