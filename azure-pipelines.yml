@@ -85,11 +85,8 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az containerapp up \
+      az containerapp update \
         --name container-app-sqmbqafc \
         --resource-group containerrg \
-        --image acrsqmbqafc.azurecr.io/$(imageName):latest
-        --registry-server acrsqmbqafc.azurecr.io
-        --registry-username acrsqmbqafc
-        --registry-password sekXic9UcjKWMNbZOt1mtYe/VHiIQiEhHNoD+joyYw+ACRD5oZOh                             
+        --image acrsqmbqafc.azurecr.io/$(imageName):latest                            
   displayName: 'Deploy to Azure Container App'
