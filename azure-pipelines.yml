@@ -17,8 +17,8 @@ steps:
 
 # Step 1: List contents of MyConsoleApp to verify the Dockerfile exists
 - script: |
-    ls -R MyContainerApp
-    ls /home/vsts/work/1/s/MyContainerApp/Dockerfile
+    ls -R
+    ls /home/vsts/work/1/s/./Dockerfile
   displayName: 'List MyConsoleApp Contents'
 
 - script: |
@@ -34,7 +34,7 @@ steps:
 
 # Step 2: Build Docker Image (with corrected context)
 - script: |
-    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/MyContainerApp/Dockerfile' MyContainerApp/
+    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/Dockerfile' ./
   displayName: 'Build Docker Image'
 
 # Step 3: Tag Docker Image (optional but useful for pushing)
