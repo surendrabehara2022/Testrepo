@@ -34,7 +34,7 @@ steps:
 
 # Step 2: Build Docker Image (with corrected context)
 - script: |
-    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/MyFirstWebAPIProject/Dockerfile' MyFirstWebAPIProject/
+    docker build -t $(imageName):$(Build.BuildId) -f '$(Build.SourcesDirectory)/MyFirstWebAPIProject/Dockerfile' $(Build.SourcesDirectory)
   displayName: 'Build Docker Image'
 
 # Step 3: Tag Docker Image (optional but useful for pushing)
