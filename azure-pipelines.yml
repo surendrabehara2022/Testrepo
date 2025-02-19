@@ -6,7 +6,7 @@ pool:
 
 variables:
   imageName: 'mycontainerapp'
-  acrName: 'acrsqmbqafc'
+  acrName: 'acrmanual'
 
 steps:
 - task: UseDotNet@2
@@ -39,8 +39,8 @@ steps:
 
 # Step 3: Tag Docker Image (optional but useful for pushing)
 - script: |
-    docker tag $(imageName):$(Build.BuildId) acrsqmbqafc.azurecr.io/$(imageName):latest
-    docker tag $(imageName):$(Build.BuildId) acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+    docker tag $(imageName):$(Build.BuildId) acrmanual.azurecr.io/$(imageName):latest
+    docker tag $(imageName):$(Build.BuildId) acrmanual.azurecr.io/$(imageName):$(Build.BuildId)
   displayName: 'Tag Docker Image'
 
 # Step 1: Azure CLI login using Managed Identity
@@ -69,24 +69,24 @@ steps:
 
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'acrserviceconnection'
+    azureSubscription: 'acrserviceconnectionmanual'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az acr login --name acrsqmbqafc
-      docker push acrsqmbqafc.azurecr.io/$(imageName):latest
-      docker push acrsqmbqafc.azurecr.io/$(imageName):$(Build.BuildId)
+      az acr login --name acrmanual
+      docker push acrmanual.azurecr.io/$(imageName):latest
+      docker push acrmanual.azurecr.io/$(imageName):$(Build.BuildId)
   displayName: 'Push Docker Image to ACR'
 
 # Step 5: Deploy to Azure Container App using Azure CLI
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'acrserviceconnection'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az containerapp update \
-        --name container-app-sqmbqafc \
-        --resource-group containerrg \
-        --image acrsqmbqafc.azurecr.io/$(imageName):latest                            
-  displayName: 'Deploy to Azure Container App'
+#- task: AzureCLI@2
+#  inputs:
+#    azureSubscription: 'acrserviceconnection'
+#    scriptType: 'bash'
+#    scriptLocation: 'inlineScript'
+#    inlineScript: |
+#      az containerapp update \
+#        --name container-app-sqmbqafc \
+#        --resource-group containerrg \
+#        --image acrsqmbqafc.azurecr.io/$(imageName):latest                            
+#  displayName: 'Deploy to Azure Container App'
