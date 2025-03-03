@@ -79,14 +79,15 @@ steps:
   displayName: 'Push Docker Image to ACR'
 
 # Step 5: Deploy to Azure Container App using Azure CLI
-#- task: AzureCLI@2
-#  inputs:
-#    azureSubscription: 'acrserviceconnection'
-#    scriptType: 'bash'
-#    scriptLocation: 'inlineScript'
-#    inlineScript: |
-#      az containerapp update \
-#        --name container-app-sqmbqafc \
-#        --resource-group containerrg \
-#        --image acrsqmbqafc.azurecr.io/$(imageName):latest                            
-#  displayName: 'Deploy to Azure Container App'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'acrserviceconnectionmanual'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr login --name acrmanual    
+      az containerapp update \
+        --name manualconatainerapp \
+        --resource-group containerrgmanual \
+        --image acrmanual.azurecr.io/$(imageName):latest                            
+  displayName: 'Deploy to Azure Container App'
